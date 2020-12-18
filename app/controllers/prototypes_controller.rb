@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only[:index]
 
   def index
     @prototypes = Prototype.all
@@ -14,6 +14,8 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.create(prototype_params)
     if @prototype.save
       redirect_to action: :index
+    else
+      render :index
     end
   end
 
